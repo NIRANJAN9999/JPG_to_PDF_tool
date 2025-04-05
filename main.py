@@ -23,8 +23,9 @@ def convert_image_to_pdf(image):
 
     # Save the PDF to a bytes buffer
     pdf_buffer = io.BytesIO()
-    # Write the PDF content to the buffer
-    pdf.output(pdf_buffer, dest='S')
+    # Get the PDF content as a string and encode it to bytes
+    pdf_content = pdf.output(dest='S')
+    pdf_buffer.write(pdf_content.encode('latin-1'))
     pdf_buffer.seek(0)
 
     return pdf_buffer
@@ -51,6 +52,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
