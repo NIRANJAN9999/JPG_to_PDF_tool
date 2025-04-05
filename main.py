@@ -2,6 +2,7 @@ import streamlit as st
 from PIL import Image
 from fpdf import FPDF
 import io
+import tempfile
 
 def convert_image_to_pdf(image):
     # Create a PDF object
@@ -12,13 +13,13 @@ def convert_image_to_pdf(image):
     if image.mode in ("RGBA", "P"):
         image = image.convert("RGB")
 
-    # Save the image to a bytes buffer
-    img_buffer = io.BytesIO()
-    image.save(img_buffer, format='JPEG')
-    img_buffer.seek(0)
+    # Use a temporary file to save the image
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as temp_file:
+        image.save(temp_file, format='JPEG')
+        temp_file_path = temp_file.name
 
-    # Add the image to the PDF
-    pdf.image(img_buffer, x=10, y=10, w=190)
+    # Add the image to the PDF using the file path
+    pdf.image(temp_file_path, x=10, y=10, w=190)
 
     # Save the PDF to a bytes buffer
     pdf_buffer = io.BytesIO()
