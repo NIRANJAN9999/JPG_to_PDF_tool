@@ -4,6 +4,83 @@ from fpdf import FPDF
 import io
 import tempfile
 
+# Custom CSS for styling
+st.markdown("""
+<style>
+body {
+    color: #fff;
+    background-color: #333;
+    font-family: 'Arial', sans-serif;
+}
+
+.stApp {
+    background-color: #2c3e50;
+}
+
+h1 {
+    color: #ecf0f1;
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.stFileUploader {
+    width: 100%;
+    padding: 10px;
+    background-color: #34495e;
+    border-radius: 5px;
+    border: 2px dashed #ecf0f1;
+    color: #ecf0f1;
+    text-align: center;
+}
+
+.stFileUploader::before {
+    content: "Drag & Drop or Click to Upload";
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.stButton > button {
+    width: 100%;
+    padding: 10px;
+    color: #fff;
+    background-color: #e74c3c;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.stButton > button:hover {
+    background-color: #c0392b;
+}
+
+.stDownloadButton > button {
+    width: 100%;
+    padding: 10px;
+    color: #fff;
+    background-color: #27ae60;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.stDownloadButton > button:hover {
+    background-color: #219a52;
+}
+
+.stMarkdown {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 1.2em;
+}
+</style>
+""", unsafe_allow_html=True)
+
 def convert_image_to_pdf(image):
     # Create a PDF object
     pdf = FPDF()
